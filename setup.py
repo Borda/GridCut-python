@@ -18,7 +18,7 @@ except ImportError:
 
 PACKAGE = 'GridCut-1.3.zip'
 HERE = os.path.abspath(os.path.dirname(__file__))
-zip_file_url = 'http://gridcut.com/dl/%s' % PACKAGE
+URL_ZIP = 'http://gridcut.com/dl/%s' % PACKAGE
 PATH_CODE = os.path.join(HERE, 'code')
 PATH_GRIDCUT = os.path.join(PATH_CODE, 'include', 'GridCut')
 PATH_ALPHAEXP = os.path.join(PATH_CODE, 'examples', 'include', 'AlphaExpansion')
@@ -27,14 +27,14 @@ VERSION = os.path.splitext(PACKAGE)[0].split('-')[-1]  # parse version
 # DOWNLOAD code
 try:  # Python2
     import StringIO
-    r = requests.get(zip_file_url, stream=True)
-    with zipfile.ZipFile(StringIO.StringIO(r.content)) as zip_ref:
-        zip_ref.extractall('code')
+    req = requests.get(URL_ZIP, stream=True)
+    with zipfile.ZipFile(StringIO.StringIO(req.content)) as zip_ref:
+        zip_ref.extractall(PATH_CODE)
 except Exception:  # Python3
     import io
-    r = requests.get(zip_file_url)
-    with zipfile.ZipFile(io.BytesIO(r.content)) as zip_ref:
-        zip_ref.extractall('code')
+    req = requests.get(URL_ZIP)
+    with zipfile.ZipFile(io.BytesIO(req.content)) as zip_ref:
+        zip_ref.extractall(PATH_CODE)
 
 
 assert os.path.exists(PATH_GRIDCUT), 'missing GridCut source code'

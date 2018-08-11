@@ -38,10 +38,11 @@ install:
 script:
   - python setup.py build_ext --inplace
   - ls *.so
-#  - nosetests test.py -v --exe --with-doctest --with-xunit --with-coverage  --cover-package=gridcut
-  - coverage run --source gridcut -m py.test test.py -v --doctest-modules
   - python setup.py check -m -s
   - python setup.py install
+  - rm *.so  # remove lib so the installed version is used
+#  - nosetests test.py -v --exe --with-doctest --with-xunit --with-coverage  --cover-package=gridcut
+  - coverage run --source gridcut -m py.test test.py -v --doctest-modules
 
 after_success:
   # the package does not have python code for coverage
