@@ -17,7 +17,12 @@ except ImportError:
     from distutils.command.build_ext import build_ext
 
 PACKAGE = 'GridCut-1.3.zip'
+HERE = os.path.abspath(os.path.dirname(__file__))
 zip_file_url = 'http://gridcut.com/dl/%s' % PACKAGE
+PATH_CODE = os.path.join(HERE, 'code')
+PATH_GRIDCUT = os.path.join(PATH_CODE, 'include', 'GridCut')
+PATH_ALPHAEXP = os.path.join(PATH_CODE, 'examples', 'include', 'AlphaExpansion')
+VERSION = os.path.splitext(PACKAGE)[0].split('-')[-1]  # parse version
 
 # DOWNLOAD code
 try:  # Python2
@@ -31,12 +36,9 @@ except Exception:  # Python3
     with zipfile.ZipFile(io.BytesIO(r.content)) as zip_ref:
         zip_ref.extractall('code')
 
-PATH_GRIDCUT = os.path.join('code', 'include', 'GridCut')
+
 assert os.path.exists(PATH_GRIDCUT), 'missing GridCut source code'
-PATH_ALPHAEXP = os.path.join('code', 'examples', 'include', 'AlphaExpansion')
 assert os.path.exists(PATH_GRIDCUT), 'missing AplhaExpansion source code'
-# parse version
-VERSION = os.path.splitext(PACKAGE)[0].split('-')[-1]
 
 
 class BuildExt(build_ext):
@@ -55,7 +57,10 @@ class BuildExt(build_ext):
 setup(
     name='gridcut',
     version=VERSION,
+    author='Willem Olding',
+    author_email='willemolding@gmail.com',
     description='pyGridCut: a python wrapper for the grid-cuts package',
+    url='https://github.com/Borda/GridCut-python',
     download_url='http://www.gridcut.com/',
     cmdclass={'build_ext': BuildExt},
     ext_modules=[Extension(
@@ -66,8 +71,8 @@ setup(
         extra_compile_args=["-fpermissive"]
         )
     ],
-    setup_requires=['requests'],
-    install_requires=['numpy'],
+    setup_requires=['requests', 'numpy'],
+    install_requires=['requests', 'numpy'],
     classifiers=[
         'Development Status :: 4 - Beta',
         "Environment :: Console",

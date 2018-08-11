@@ -13,19 +13,27 @@ environment:
     # See: http://www.appveyor.com/docs/installed-software#python
 
     - PYTHON: "COST:\\Python27"
-      PYTHON_VERSION: "2.7.x" # currently 2.7.9
+      PYTHON_VERSION: "2.7.x"
       PYTHON_ARCH: "32"
 
     - PYTHON: "COST:\\Python27-x64"
-      PYTHON_VERSION: "2.7.x" # currently 2.7.9
+      PYTHON_VERSION: "2.7.x"
       PYTHON_ARCH: "64"
 
     - PYTHON: "COST:\\Python35"
-      PYTHON_VERSION: "3.5.x" # currently 3.4.3
+      PYTHON_VERSION: "3.5.x"
       PYTHON_ARCH: "32"
 
     - PYTHON: "COST:\\Python35-x64"
-      PYTHON_VERSION: "3.5.x" # currently 3.4.3
+      PYTHON_VERSION: "3.5.x"
+      PYTHON_ARCH: "64"
+
+    - PYTHON: "COST:\\Python36"
+      PYTHON_VERSION: "3.6.x"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "COST:\\Python36-x64"
+      PYTHON_VERSION: "3.6.x"
       PYTHON_ARCH: "64"
 
 
@@ -36,7 +44,7 @@ install:
   # directly to master instead of just PR builds (or the converse).
   # credits: JuliaLang developers.
   - pip install -r requirements.txt
-  - pip install nose coverage
+  - pip install pytest coverage
 
 build_script:
   # Build the compiled extension
@@ -44,13 +52,9 @@ build_script:
 
 test_script:
   # Run the project tests
-  - nosetests -vv
-
-#after_test:
-#  # If tests are successful, create binary packages for the project.
-#  -
+  - coverage run --source gridcut -m py.test test.py -v --doctest-modules
 
 on_success:
   # Could run coveralls here but will leave that to travis tests
-  - echo Build succesful!
   - python setup.py install
+  - coverage report

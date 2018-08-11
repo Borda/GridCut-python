@@ -1,6 +1,7 @@
 # pyGridCut
 
 [![Build Status](https://travis-ci.org/Borda/GridCut-python.svg?branch=master)](https://travis-ci.org/Borda/GridCut-python)
+[![codecov](https://codecov.io/gh/Borda/GridCut-python/branch/master/graph/badge.svg)](https://codecov.io/gh/Borda/GridCut-python)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e4562d3e10a94c4fa373630cab2e795f)](https://www.codacy.com/app/Borda/GridCut-python?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Borda/GridCut-python&amp;utm_campaign=Badge_Grade)
 [![Build status](https://ci.appveyor.com/api/projects/status/dp9v07hx6cc6f8r5?svg=true)](https://ci.appveyor.com/project/Borda/pygridcut)
 
@@ -28,7 +29,7 @@ For installation use previous commands it does following steps:
 
 Note, that downloading the source cede you agree with GridCut [license](http://www.gridcut.com/licensing.php) 
 
-## Show test results
+## Show examples
 
 ### Source-Sink segmentation
 
