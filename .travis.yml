@@ -44,9 +44,8 @@ script:
   - coverage run --source gridcut -m py.test test.py -v --doctest-modules
 
 after_success:
-  - echo Build succesful!
-# the package does not have python code for coverage
-#  - codecov
-#  - coverage xml
-#  - python-codacy-coverage -r coverage.xml
-#  - coverage report
+  # the package does not have python code for coverage
+  - codecov
+  - coverage xml
+  - python-codacy-coverage -r coverage.xml
+  - coverage report
